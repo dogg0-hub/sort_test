@@ -2,12 +2,17 @@
 import { useState } from "react";
 
 export default function Home() {
-  const array = [2.909, -1, 0.12, 0.13, 1.233, 4.233, 54, 3, 7 , 2000, 10, 9 , 8];
+  const array = [2.909, -1000, 0.12, 0.13, 1.233, 4.233, 54, 3, 7 , 2000, 10, 9 , 8];
   let pointer : number[] = [];
   const [result, setResult] = useState<number[]>([]);
+  let min;
 
   function Caluculate(){
-    
+    // 最小値を取ってくる
+    // 先頭と比較
+    const aryMin = function(a : number, b: number){return Math.min(a, b);}
+    min = array.reduce(aryMin);
+    console.log("min",min);
   }
 
   return (

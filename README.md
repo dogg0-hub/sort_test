@@ -13,3 +13,11 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+バブルソートの実装
+http://localhost:3000
+ファイル：app\page.tsx
+
+選択ソートの実装
+http://localhost:3000/sentaku
+ファイル：app\sentaku\page.tsx
