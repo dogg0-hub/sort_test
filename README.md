@@ -22,15 +22,16 @@ bun dev
 ### Step3
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-バブルソートの実装
-`http://localhost:3000`
+## ディレクトリ構造
+### バブルソートの実装
+`http://localhost:3000`<br>
 ファイルパス：app\page.tsx
 
-選択ソートの実装
-`http://localhost:3000/sentaku`
+### 選択ソートの実装
+`http://localhost:3000/sentaku`<br>
 ファイルパス：app\sentaku\page.tsx
 
-補足
+#### 補足
 AIは全く使用しておりません。
-Git管理といった意味では余計なファイル群ですが、念のため証拠として残しておきます。
+Git管理といった意味では余計なファイル群ですが、念のため証拠として残しておきます。<br>
 ファイルパス：app\(prove_dont_use_ai)
