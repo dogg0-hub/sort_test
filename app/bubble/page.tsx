@@ -3,16 +3,18 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
-  const array = [2.909, -1, 0.12, 0.13, 1.233, 4.233, 54, 3, 7 , 2000, 10, 9 , 8];
+  const array = [8,1,2,10, 1, 2, 6,4, 3, 5,7, 4, 1,9];
   let pointer : number[] = [];
   const [result, setResult] = useState<number[]>([]);
   // 最初の1番左から、右隣を見る
 
   function Caluculate(){
     while(pointer.length !== array.length){
-      for(let i = 0; i < array.length; i++){
+      for(let i = 0; i < array.length - 1; i++){
         console.log("===");
-        console.log(i + "巡目");
+        console.log((i+1) + "巡目");
+        console.log("array.lenhhは" + array.length);
+        console.log("pointer.length" + pointer.length);
         console.log("【for文】array" + i + "は" + array[i]);
         console.log("【for文】arrayi+1" + "は" + array[i + 1]!);
         if(array[i] > array[i+1]){

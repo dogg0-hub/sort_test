@@ -2,7 +2,10 @@
 バブルソートと選択ソートをNext.jsにて実装したものです。
 
 ## 想定するテストケース
-重複のない数列
+###  バブルソート
+重複を含む数値型の配列(分数を含まない)
+###  選択ソート
+重複のない数値型の配列(分数を含まない)
 
 ## Getting Started
 ### Step1
@@ -24,7 +27,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## ディレクトリ構造
 ### バブルソートの実装
-`http://localhost:3000`<br>
+`http://localhost:3000/bubble`<br>
 ファイルパス：app\page.tsx
 
 ### 選択ソートの実装
