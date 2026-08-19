@@ -5,60 +5,92 @@ export default function Home() {
   const array = [ 4, 5, 2,1,  1,1,3, 6, 9, 7, 8];
   let zantei : number[] = [];
   const [result, setResult] = useState<number[]>([]);
+  let resultArray : number[] = [];
   let min;
   let array_with_index : number[] = [];
+  let zantei_with_index : number[] = [];
+  let pointer = 0;
 
   function Caluculate(){
     // 最小値を取ってくる DONE
     // 先頭と比較
     array_with_index[0]=array[0];
-    console.log("arrray_with_index", array_with_index);
     for(let i = 0; i < array_with_index.length; i++){
     
       if(i === 0){
+        console.log("一巡目");
         min = array.reduce(function(accumulator, currentValue, currentIndex, array){
-              // console.log("reduce内：currentIndexは" + currentIndex + "、currentValueは" + currentValue);
+              //console.log("reduce内：currentIndexは" + currentIndex + "、currentValueは" + currentValue);
               array_with_index.push(array[currentIndex]); 
               return Math.min(accumulator, currentValue);
             });
+
+        console.log("min",min);
+        // ここで配列に番号がついた
+        console.log("array_with_index", array_with_index);
+        // 番号を取り出して、最小値を取ってくる
+        let num = array_with_index.indexOf(min);
+        console.log("arrayのminは" + array_with_index.indexOf(min) + "中身は" + array_with_index[num]);
+        //最小値を取り出しつつ、それが配列の何番目か判断できるようにしないといけない DONE
+        console.log("やるまえ" + array_with_index);
+    
+        if(array_with_index[0] > array_with_index[num]){
+          console.log("やるまえ個別", array_with_index[0] + "," + array_with_index[num]);
+          [array_with_index[0], array_with_index[num]] = [array_with_index[num], array_with_index[0]];
+          console.log("やったあと", array_with_index[0] + "," + array_with_index[num]);
+          resultArray.push(array_with_index);
+          console.log("やったあとのさいしゅう：",array_with_index);
+        }
+        console.log("現時点は" + resultArray);
+        zantei = array_with_index.slice(1);
+        console.log("さいしゅう：",zantei);
+        zantei_with_index[0]=zantei[0];
+
       }else{
-        min = zantei.reduce(function(accumulator, currentValue, currentIndex, array){
-          // console.log("reduce内：currentIndexは" + currentIndex + "、currentValueは" + currentValue);
-            if(i == 0){
-              array_with_index.push(array[currentIndex]); 
+        console.log(i + "巡目");
+        if(zantei.length == 0){
+          return;
+        }
+        console.log("zantei", zantei);
+        console.log("しょりまえの暫定", zantei);
+        console.log("しょりまえの暫定", zantei_with_index);
+        zantei.slice(0, zantei_with_index.length);
+        console.log("しょりごの暫定", zantei);
+        console.log("しょりごの暫定", zantei_with_index);
+        min = zantei.reduce(function(accumulator, currentValue, currentIndex, zantei){
+            console.log("reduce内：currentIndexは" + currentIndex + "、currentValueは" + currentValue);
+            if(pointer !== 1){
+              zantei_with_index.push(zantei[currentIndex]); 
             }
+            
+            pointer = 1; 
+            console.log("reduce", zantei_with_index);
             return Math.min(accumulator, currentValue);
             });
-      }
-    
+          
+        console.log("min2",min);
+        // ここで配列に番号がついた
+        console.log("zantei_with_index", zantei_with_index);
+        // 番号を取り出して、最小値を取ってくる
+        let num = zantei_with_index.indexOf(min);
+        console.log("arrayのminは" + zantei.indexOf(min) + "中身は" + zantei[num]);
+        //最小値を取り出しつつ、それが配列の何番目か判断できるようにしないといけない DONE
+        console.log("やるまえ2" + zantei);
+        console.log("やるまえ2個別まえ", zantei[0] + "," + zantei[num]);
+        if(zantei[0] > zantei[num]){
+          console.log("やるまえ2個別", zantei[0] + "," + zantei[num]);
+          [zantei[0], zantei[num]] = [zantei[num], zantei[0]];
+          console.log("やったあと2", zantei[0] + "," + zantei[num]);
+        }
+        console.log("現時点は" + zantei);
+        zantei = zantei.slice(1);
+        console.log("さいしゅう2：",zantei);
 
-      console.log("min",min);
-      // ここで配列に番号がついた
-      console.log("array_with_index", array_with_index);
-      // 番号を取り出して、最小値を取ってくる
-      let num = array_with_index.indexOf(min);
-      console.log("arrayのminは" + array_with_index.indexOf(min) + "中身は" + array_with_index[num]);
-      //最小値を取り出しつつ、それが配列の何番目か判断できるようにしないといけない DONE
-      console.log("やるまえ" + array_with_index);
-  
-    
-      // 重複対策
-      // じゅんばんに見ていく
-      // そもそも重複はテストケースとして考えられているのか？
-      // array_with_index.forEach(element => {
-        
-      // });
-
-      if(array_with_index[i] > array_with_index[num]){
-        console.log("やるまえ個別", array_with_index[i] + "," + array_with_index[num]);
-        [array_with_index[i], array_with_index[num]] = [array_with_index[num], array_with_index[i]];
-        console.log("やったあと", array_with_index[i] + "," + array_with_index[num]);
+        resultArray.push(zantei[1]);
       }
-      console.log("現時点は" + array_with_index);
-      zantei = array_with_index.slice(i + 1);
-      console.log("さいしゅう：",zantei);
+
     }
-    setResult(array_with_index);
+    setResult(resultArray);
   }
 
   return (
