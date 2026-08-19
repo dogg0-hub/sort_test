@@ -4,94 +4,84 @@ import { useState } from "react";
 export default function Home() {
   const array = [ 4, 5, 2,1,  1,1,3, 6, 9, 7, 8];
   let zantei : number[] = [];
-  const [result, setResult] = useState<number[]>([]);
+  const [length, setLength] = useState(0);
+  const [kijun, setKijun] = useState(0);
   let resultArray : number[] = [];
-  let min;
+  let min, max;
   let array_with_index : number[] = [];
-  let zantei_with_index : number[] = [];
-  let pointer = 0;
+  let hantei;
+  let test;
+  let result;
 
   function Caluculate(){
-    // 最小値を取ってくる DONE
-    // 先頭と比較
-    array_with_index[0]=array[0];
-    for(let i = 0; i < array_with_index.length; i++){
-    
-      if(i === 0){
-        console.log("一巡目");
-        min = array.reduce(function(accumulator, currentValue, currentIndex, array){
-              //console.log("reduce内：currentIndexは" + currentIndex + "、currentValueは" + currentValue);
-              array_with_index.push(array[currentIndex]); 
+    max = array.reduce(function(accumulator, currentValue, currentIndex, array){
+          return Math.max(accumulator, currentValue);
+        });
+
+    console.log("hanteiさいしょ" + length);
+    console.log("max" + max);
+    //長さとマックスの値
+    let num = array.indexOf(max);
+    hantei = array[num]
+    console.log("nummm", num);
+    console.log("hantei", hantei)//9
+    //9と端っこの値
+    //indexが最後の数
+    let temp = array[array.length - 1]
+    setKijun(temp);
+    console.log("kijun", kijun);
+    // while(test < 10){
+      // trueの間繰り返す
+      for(let i = 0; i < array.length; i++){
+        console.log("みん前", array_with_index);
+        if(i < 0){
+          min = array.reduce(function(accumulator, currentValue, currentIndex, array){
+              array_with_index.push(array[currentIndex]);
               return Math.min(accumulator, currentValue);
-            });
-
-        console.log("min",min);
-        // ここで配列に番号がついた
-        console.log("array_with_index", array_with_index);
-        // 番号を取り出して、最小値を取ってくる
-        let num = array_with_index.indexOf(min);
-        console.log("arrayのminは" + array_with_index.indexOf(min) + "中身は" + array_with_index[num]);
-        //最小値を取り出しつつ、それが配列の何番目か判断できるようにしないといけない DONE
-        console.log("やるまえ" + array_with_index);
-    
-        if(array_with_index[0] > array_with_index[num]){
-          console.log("やるまえ個別", array_with_index[0] + "," + array_with_index[num]);
-          [array_with_index[0], array_with_index[num]] = [array_with_index[num], array_with_index[0]];
-          console.log("やったあと", array_with_index[0] + "," + array_with_index[num]);
-          resultArray.push(array_with_index);
-          console.log("やったあとのさいしゅう：",array_with_index);
-        }
-        console.log("現時点は" + resultArray);
-        zantei = array_with_index.slice(1);
-        console.log("さいしゅう：",zantei);
-        zantei_with_index[0]=zantei[0];
-
-      }else{
-        console.log(i + "巡目");
-        if(zantei.length == 0){
-          return;
-        }
-        console.log("zantei", zantei);
-        console.log("しょりまえの暫定", zantei);
-        console.log("しょりまえの暫定", zantei_with_index);
-        zantei.slice(0, zantei_with_index.length);
-        console.log("しょりごの暫定", zantei);
-        console.log("しょりごの暫定", zantei_with_index);
-        min = zantei.reduce(function(accumulator, currentValue, currentIndex, zantei){
-            console.log("reduce内：currentIndexは" + currentIndex + "、currentValueは" + currentValue);
-            if(pointer !== 1){
-              zantei_with_index.push(zantei[currentIndex]); 
+          });
+        }else{
+          min = array_with_index.reduce(function(accumulator, currentValue, currentIndex, array_with_index){
+            if(i == 0){
+              array_with_index[0] = array[0];
+              array_with_index.push(array[currentIndex]);
             }
-            
-            pointer = 1; 
-            console.log("reduce", zantei_with_index);
             return Math.min(accumulator, currentValue);
-            });
-          
-        console.log("min2",min);
-        // ここで配列に番号がついた
-        console.log("zantei_with_index", zantei_with_index);
-        // 番号を取り出して、最小値を取ってくる
-        let num = zantei_with_index.indexOf(min);
-        console.log("arrayのminは" + zantei.indexOf(min) + "中身は" + zantei[num]);
-        //最小値を取り出しつつ、それが配列の何番目か判断できるようにしないといけない DONE
-        console.log("やるまえ2" + zantei);
-        console.log("やるまえ2個別まえ", zantei[0] + "," + zantei[num]);
-        if(zantei[0] > zantei[num]){
-          console.log("やるまえ2個別", zantei[0] + "," + zantei[num]);
-          [zantei[0], zantei[num]] = [zantei[num], zantei[0]];
-          console.log("やったあと2", zantei[0] + "," + zantei[num]);
+
+          });
+          console.log("array_with_indexさいしょ", array_with_index);
+        //ここで常に最小の１を探してしまう
+        let num = array_with_index.indexOf(min);
+        console.log("min" + min + "num" + num);
+        if(array_with_index[0] > array_with_index[num]){
+          console.log("array_with_index[i]は、" + array_with_index[0] + "：array_with_index[num]は、" + array_with_index[num]);
+          [array_with_index[0], array_with_index[num]] = [array_with_index[num], array_with_index[0]];
         }
-        console.log("現時点は" + zantei);
-        zantei = zantei.slice(1);
-        console.log("さいしゅう2：",zantei);
+        console.log("けっか", array_with_index);
+        resultArray.push(array_with_index[0]);
+        console.log("resultarray" + resultArray);
+        array_with_index = array_with_index.slice(1);
+        console.log("すぷらいす", array_with_index);
+        // result.push(array_with_index);
+        let length_index = array.length;
+        console.log("arei" + length_index);
+        setLength(length_index);
+        console.log("hanteiさいご" + hantei);
+        let temp = array[array.length - 1];
+        setKijun(temp);
+        console.log("temp", temp);//8
+        console.log("kijunsaigo", kijun);
+        }
+        
+        
+        }
+      test =+ 1;
+    // }
 
-        resultArray.push(zantei[1]);
-      }
-
-    }
-    setResult(resultArray);
+      // setResult();
   }
+  
+    
+    
 
   return (
     <>
@@ -106,9 +96,9 @@ export default function Home() {
         ソートするボタン
       </button>
       <div>ソート結果：</div>
-      {result.map((value, i)=>(
+      {/* {result.map((value, i)=>(
         <div key={i}>{value},</div>
-      ))}
+      ))} */}
     </>
   );
 }
